@@ -1,5 +1,5 @@
 # v1 upgrade
-We recommend using the new v1 version of the HMKit Fleet. Check it out in the [main] branch.
+We recommend using the new v1 version of the HMKit Fleet. Check it out in the [main](https://github.com/highmobility/hmkit-fleet/tree/main) branch.
 
 We will continue updating v0 with bug fixes and security updates.
 
