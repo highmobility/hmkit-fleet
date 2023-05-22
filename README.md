@@ -1,3 +1,8 @@
+# v1 upgrade
+We recommend using the new v1 version of the HMKit Fleet. Check it out in the [main] branch.
+
+We will continue updating v0 with bug fixes and security updates.
+
 # HMKit Fleet
 
 HMKit Fleet is a Kotlin/Java library that combines different API-s: OAuth, Service Account API and

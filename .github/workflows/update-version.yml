@@ -5,7 +5,7 @@ on:
     types:
       - closed
     branches:
-      - main
+      - v0
 
 jobs:
   create-new-tag:
