@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.7.3] - 2023-08-25
+
+### Added
+
+- Lexus brand to the `Brand` enum
+
 ## [0.7.2]
 - Add Toyota brand
 
