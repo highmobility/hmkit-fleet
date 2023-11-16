@@ -101,9 +101,9 @@ enum class Brand {
     @SerialName("toyota")
     TOYOTA,
 
-    @SerialName("lexus")
-    LEXUS,
-
     @SerialName("sandbox")
-    SANDBOX
+    SANDBOX,
+
+    @SerialName("tesla")
+    TESLA,
 }
