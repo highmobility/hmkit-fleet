@@ -11,5 +11,5 @@ $dokka.location:com.highmobility.hmkitfleet/HMKitFleet.Environment///PointingToD
 com.highmobility.hmkitfleet
 com.highmobility.hmkitfleet.model
 com.highmobility.hmkitfleet.network
-utils
+com.highmobility.hmkitfleet.utils
 
