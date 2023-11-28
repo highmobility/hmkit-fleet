@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.7.5] - 2023-11-29
+
+### Added
+
+- Porsche, Maserati and Kia brands
+
 ## [0.7.4] - 2023-11-16
 
 ### Added
