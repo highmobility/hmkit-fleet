@@ -2,12 +2,6 @@
 
 This is the changelog for v1 releases. See v0 changelog in the [v0 branch](https://github.com/highmobility/hmkit-fleet/tree/v0).
 
-## [1.0.3] - 2023-11-29
-
-### Added
-
-- Porsche, Maserati and Kia brands
-
 ## [1.0.2] - 2023-11-16
 
 ### Added
