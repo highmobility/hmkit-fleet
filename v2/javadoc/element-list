@@ -1,0 +1,14 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:com.highmobility.hmkitfleet.model/ClearanceStatus.Status///PointingToDeclaration/com/highmobility/hmkitfleet/model/ClearanceStatus.Status.html
+$dokka.location:com.highmobility.hmkitfleet.model/EligibilityStatus.ConnectivityStatus///PointingToDeclaration/com/highmobility/hmkitfleet/model/EligibilityStatus.ConnectivityStatus.html
+$dokka.location:com.highmobility.hmkitfleet.model/EligibilityStatus.DataDelivery///PointingToDeclaration/com/highmobility/hmkitfleet/model/EligibilityStatus.DataDelivery.html
+$dokka.location:com.highmobility.hmkitfleet.model/Odometer.Length///PointingToDeclaration/com/highmobility/hmkitfleet/model/Odometer.Length.html
+$dokka.location:com.highmobility.hmkitfleet/HMKitConfiguration.Builder///PointingToDeclaration/com/highmobility/hmkitfleet/HMKitConfiguration.Builder.html
+$dokka.location:com.highmobility.hmkitfleet/HMKitCredentials.JwtProvider///PointingToDeclaration/com/highmobility/hmkitfleet/HMKitCredentials.JwtProvider.html
+$dokka.location:com.highmobility.hmkitfleet/HMKitFleet.Environment.Companion///PointingToDeclaration/com/highmobility/hmkitfleet/HMKitFleet.Environment.Companion.html
+$dokka.location:com.highmobility.hmkitfleet/HMKitFleet.Environment///PointingToDeclaration/com/highmobility/hmkitfleet/HMKitFleet.Environment.html
+com.highmobility.hmkitfleet
+com.highmobility.hmkitfleet.model
+com.highmobility.hmkitfleet.network
+
