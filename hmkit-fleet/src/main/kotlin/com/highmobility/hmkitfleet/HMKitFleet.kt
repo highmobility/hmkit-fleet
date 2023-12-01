@@ -49,7 +49,7 @@ import java.util.concurrent.CompletableFuture
  * );
  * ```
  *
- * [javadoc](https://highmobility.github.io/hmkit-fleet-v2/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.html)
+ * [javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.html)
  *
  */
 class HMKitFleet constructor(
@@ -144,7 +144,7 @@ class HMKitFleet constructor(
   /**
    * The Fleet SDK environment.
    *
-   * [javadoc](https://highmobility.github.io/hmkit-fleet-v2/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.Environment.html)
+   * [javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.Environment.html)
    */
   enum class Environment {
     PRODUCTION, SANDBOX;

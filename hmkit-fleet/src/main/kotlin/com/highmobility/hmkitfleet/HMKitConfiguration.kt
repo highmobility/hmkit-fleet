@@ -10,7 +10,7 @@ import okhttp3.OkHttpClient
  * @param environment The SDK environment. Default is Production.
  * @param client Optionally, set the OkHttpClient to be used for network requests.
  *
- * [javadoc](https://highmobility.github.io/hmkit-fleet-v2/v2/javadoc/com/highmobility/hmkitfleet/HMKitConfiguration.html)
+ * [javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitConfiguration.html)
  */
 class HMKitConfiguration private constructor(builder: Builder) {
   val credentials = builder.credentials ?: throw IllegalArgumentException("credentials must be set")
