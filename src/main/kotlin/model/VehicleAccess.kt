@@ -93,5 +93,29 @@ enum class Brand {
     ALFAROMEO,
 
     @SerialName("ford")
-    FORD
+    FORD,
+
+    @SerialName("renault")
+    RENAULT,
+
+    @SerialName("toyota")
+    TOYOTA,
+
+    @SerialName("lexus")
+    LEXUS,
+
+    @SerialName("porsche")
+    PORSCHE,
+
+    @SerialName("maserati")
+    MASERATI,
+
+    @SerialName("kia")
+    KIA,
+
+    @SerialName("tesla")
+    TESLA,
+
+    @SerialName("sandbox")
+    SANDBOX,
 }
