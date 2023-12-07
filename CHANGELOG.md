@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.5.3]
+- add renault, toyota, lexus, porsche, maserati, kia, tesla, sandbox brands
+
 ## [0.5.2]
 - add getClearanceStatus:vin method
 - undeprecate ClearanceStatus.Status.ERROR
