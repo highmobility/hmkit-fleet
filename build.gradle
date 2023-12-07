@@ -14,7 +14,7 @@ ext {
     coroutinesVersion = '1.6.4'
     koinVersion = '3.2.0'
     ver = [
-            "hmkit-fleet"            : "0.5.2",
+            "hmkit-fleet"            : "0.5.3",
             "hmkit-crypto-telematics": "0.1",
             "hmkit-auto-api"         : "13.1.1",
     ]
