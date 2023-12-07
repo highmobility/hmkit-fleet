@@ -163,7 +163,7 @@ class HMKitFleet constructor(
 
       /**
        * Override the web url, which is normally derived from the [HMKitFleet.environment]
-       * value
+       * value.
        */
       @JvmField
       var webUrl: String? = null

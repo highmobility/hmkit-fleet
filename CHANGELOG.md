@@ -2,6 +2,10 @@
 
 This is the changelog for v2 releases. See v0/v1 releases in appropriate branches.
 
+## [2.2.2] - 2023-12-7
+
+- Update javadoc
+
 ## [2.0.1] - 2023-11-29
 
 ### Added
