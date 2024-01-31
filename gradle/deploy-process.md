@@ -5,12 +5,14 @@ Release is done via a merged pull request to main/v0/v1 and then creating a rele
 ## Steps for v0, v1 and v2
 
 - update CHANGELOG.md
-- update the version in `gradle.properties` 
+- update the version in `gradle.properties`
 - merge the PR to the `v0`/`v1`/`main` branch
-- Create release tag manually
-- Create a release from this tag 
+- Create release tag
+  - target: v0/v1/main
+  - press generate relase notes
+  - press publish release
   - Action starts that pushes the package to MavenCentral.
-  - You can check OSSRH whether release was successful or not.
+  - You can check https://oss.sonatype.org/ whether release was successful or not.
 
 ❗Release the v0 and v1 first if releasing all versions. This way the v2 is the latest in the Releases changelog.
 
