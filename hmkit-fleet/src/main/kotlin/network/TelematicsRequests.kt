@@ -65,6 +65,37 @@ internal class TelematicsRequests(
         return postCommand(encryptedCommand, accessCertificate)
     }
 
+    suspend fun sendCommandV05(
+        command: Bytes,
+        accessCertificate: AccessCertificate
+    ): Response<Bytes> {
+        val nonce = getNonce()
+
+        if (nonce.error != null) return Response(null, nonce.error)
+
+        val encryptedCommand =
+            crypto.createTelematicsContainer(
+                command,
+                privateKey,
+                certificate.serial,
+                accessCertificate,
+                Bytes(nonce.response!!)
+            )
+
+        val encryptedCommandResponse = postCommandV05(encryptedCommand, accessCertificate)
+
+        if (encryptedCommandResponse.error != null) return encryptedCommandResponse
+
+        val decryptedResponseCommand = crypto.getPayloadFromTelematicsContainer(
+            encryptedCommandResponse.response!!,
+            privateKey,
+            accessCertificate,
+        )
+
+        return Response(decryptedResponseCommand)
+    }
+
+
     private suspend fun getNonce(): Response<String> {
         val request = Request.Builder()
             .url("${baseUrl}/nonces")
@@ -144,5 +175,36 @@ internal class TelematicsRequests(
         }
 
         return responseObject
+    }
+
+    private suspend fun postCommandV05(
+        encryptedCommand: Bytes,
+        accessCertificate: AccessCertificate,
+    ): Response<Bytes> {
+        val request = Request.Builder()
+            .url("${baseUrl}/telematics_commands")
+            .headers(baseHeaders)
+            .post(
+                requestBody(
+                    mapOf(
+                        "serial_number" to accessCertificate.gainerSerial.hex,
+                        "issuer" to certificate.issuer.hex,
+                        "data" to encryptedCommand.base64
+                    )
+                )
+            )
+            .build()
+
+        printRequest(request)
+
+        val call = client.newCall(request)
+        val response = call.await()
+
+        return tryParseResponse(response, HttpURLConnection.HTTP_OK) { body ->
+            val jsonResponse = Json.parseToJsonElement(body) as JsonObject
+            val encryptedResponseCommand =
+                jsonResponse.jsonObject["response_data"]?.jsonPrimitive?.content
+            Response(Bytes(encryptedResponseCommand), null)
+        }
     }
 }
