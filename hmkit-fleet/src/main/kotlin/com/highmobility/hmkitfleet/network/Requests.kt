@@ -116,7 +116,7 @@ internal open class Requests(
     json: JsonObject
   ): com.highmobility.hmkitfleet.network.Response<T> = if (errors != null && errors.size > 0) {
     val error =
-      Json.decodeFromJsonElement<Error>(errors.first())
+      jsonIg.decodeFromJsonElement<Error>(errors.first())
     Response(null, error)
   } else {
     val error = Error(

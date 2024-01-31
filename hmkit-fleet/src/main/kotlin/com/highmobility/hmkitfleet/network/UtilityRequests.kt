@@ -82,10 +82,10 @@ internal class UtilityRequests(
   ): RequestBody {
     val vehicle = buildJsonObject {
       put("vin", vin)
-      put("brand", Json.encodeToJsonElement(brand))
+      put("brand", jsonIg.encodeToJsonElement(brand))
     }
 
-    val body = Json.encodeToString(vehicle).toRequestBody(mediaType)
+    val body = jsonIg.encodeToString(vehicle).toRequestBody(mediaType)
     return body
   }
 }
