@@ -66,7 +66,7 @@ internal class AccessCertificateRequests(
         val response = call.await()
 
         return tryParseResponse(response, HttpURLConnection.HTTP_CREATED) { body ->
-            val jsonResponse = Json.parseToJsonElement(body) as JsonObject
+            val jsonResponse = jsonIg.parseToJsonElement(body) as JsonObject
             val certBytes = jsonResponse.jsonObject[apiDeviceCertKey]?.jsonPrimitive?.content
             val cert = AccessCertificate(certBytes)
             Response(cert, null)

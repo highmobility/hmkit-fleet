@@ -114,7 +114,7 @@ internal class TelematicsRequests(
         val response = call.await()
 
         return tryParseResponse(response, HttpURLConnection.HTTP_CREATED) { body ->
-            val jsonResponse = Json.parseToJsonElement(body) as JsonObject
+            val jsonResponse = jsonIg.parseToJsonElement(body) as JsonObject
             val nonce = jsonResponse.jsonObject["nonce"]?.jsonPrimitive?.content
             Response(nonce, null)
         }
@@ -145,7 +145,7 @@ internal class TelematicsRequests(
 
         val responseObject = try {
             if (response.code == 200 || response.code == 400 || response.code == 404 || response.code == 408) {
-                val telematicsResponse = Json.decodeFromString<TelematicsCommandResponse>(responseBody)
+                val telematicsResponse = jsonIg.decodeFromString<TelematicsCommandResponse>(responseBody)
 
                 // Server only returns encrypted data if status is OK
                 val decryptedData = if (telematicsResponse.status == TelematicsCommandResponse.Status.OK) {
@@ -168,7 +168,7 @@ internal class TelematicsRequests(
             } else {
                 // try to parse the normal server error format.
                 // it will throw and will be caught if server returned unknown format
-                TelematicsResponse(errors = Json.decodeFromString(responseBody))
+                TelematicsResponse(errors = jsonIg.decodeFromString(responseBody))
             }
         } catch (e: Exception) {
             TelematicsResponse(errors = listOf(Error(title = "Unknown server response", detail = e.message)))
@@ -201,7 +201,7 @@ internal class TelematicsRequests(
         val response = call.await()
 
         return tryParseResponse(response, HttpURLConnection.HTTP_OK) { body ->
-            val jsonResponse = Json.parseToJsonElement(body) as JsonObject
+            val jsonResponse = jsonIg.parseToJsonElement(body) as JsonObject
             val encryptedResponseCommand =
                 jsonResponse.jsonObject["response_data"]?.jsonPrimitive?.content
             Response(Bytes(encryptedResponseCommand), null)

@@ -41,6 +41,15 @@ internal open class Requests(
     val mediaType = "application/json; charset=utf-8".toMediaType()
     val baseHeaders = Headers.Builder().add("Content-Type", "application/json").build()
 
+    protected val jsonIg = Json {
+        ignoreUnknownKeys = true
+    }
+
+    private val jsonIgPr = Json {
+        ignoreUnknownKeys = true
+        prettyPrint = true
+    }
+
     inline fun <T> tryParseResponse(
         response: Response,
         expectedResponseCode: Int,
@@ -61,14 +70,12 @@ internal open class Requests(
     }
 
     fun printRequest(request: Request) {
-        val format = Json { prettyPrint = true }
-
         // parse into json, so can log it out with pretty print
         val body = request.bodyAsString()
         var bodyInPrettyPrint = ""
         if (!body.isNullOrBlank()) {
-            val jsonElement = format.decodeFromString<JsonElement>(body)
-            bodyInPrettyPrint = format.encodeToString(jsonElement)
+            val jsonElement = jsonIgPr.decodeFromString<JsonElement>(body)
+            bodyInPrettyPrint = jsonIgPr.encodeToString(jsonElement)
         }
 
         logger.debug(
@@ -85,14 +92,14 @@ internal open class Requests(
     }
 
     fun <T> parseError(responseBody: String): com.highmobility.hmkitfleet.network.Response<T> {
-        val json = Json.parseToJsonElement(responseBody)
+        val json = jsonIg.parseToJsonElement(responseBody)
         if (json is JsonObject) {
             // there are 3 error formats
             val errors = json["errors"] as? JsonArray
 
             return if (errors != null && errors.size > 0) {
                 val error =
-                    Json.decodeFromJsonElement<Error>(errors.first())
+                    jsonIg.decodeFromJsonElement<Error>(errors.first())
                 Response(null, error)
             } else {
                 val error = Error(
@@ -104,7 +111,7 @@ internal open class Requests(
             }
         } else if (json is JsonArray) {
             if (json.size > 0) {
-                val error = Json.decodeFromJsonElement<Error>(json.first())
+                val error = jsonIg.decodeFromJsonElement<Error>(json.first())
                 return Response(null, error)
             }
         }
