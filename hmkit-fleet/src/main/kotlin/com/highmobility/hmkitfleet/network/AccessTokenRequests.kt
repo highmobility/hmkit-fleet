@@ -26,7 +26,6 @@ package com.highmobility.hmkitfleet.network
 import com.highmobility.hmkitfleet.HMKitCredentials
 import com.highmobility.hmkitfleet.model.AccessToken
 import com.highmobility.hmkitfleet.utils.await
-import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
@@ -70,8 +69,6 @@ internal class AccessTokenRequests(
     return request
   }
 
-  private val json = Json { ignoreUnknownKeys = true }
-
   suspend fun getAccessToken(): Response<AccessToken> {
     val cachedToken = cache.accessToken
     if (cachedToken != null) return Response(cachedToken)
@@ -86,7 +83,7 @@ internal class AccessTokenRequests(
 
     return try {
       if (response.code == HttpURLConnection.HTTP_CREATED || response.code == HttpURLConnection.HTTP_OK) {
-        cache.accessToken = json.decodeFromString(responseBody)
+        cache.accessToken = jsonIg.decodeFromString(responseBody)
         Response(cache.accessToken)
       } else {
         parseError(responseBody)

@@ -77,11 +77,11 @@ internal class ClearanceRequests(
     val response = call.await()
 
     return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
-      val jsonElement = Json.parseToJsonElement(responseBody) as JsonObject
+      val jsonElement = jsonIg.parseToJsonElement(responseBody) as JsonObject
       val statuses = jsonElement["vehicles"] as JsonArray
       for (statusElement in statuses) {
         val status =
-          Json.decodeFromJsonElement<RequestClearanceResponse>(statusElement)
+          jsonIg.decodeFromJsonElement<RequestClearanceResponse>(statusElement)
         if (status.vin == vin) {
           return@tryParseResponse Response(status, null)
         }
@@ -108,11 +108,11 @@ internal class ClearanceRequests(
     val response = call.await()
 
     return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
-      val statuses = Json.parseToJsonElement(responseBody) as JsonArray
+      val statuses = jsonIg.parseToJsonElement(responseBody) as JsonArray
 
       val builder = Array(statuses.size) {
         val statusElement = statuses[it]
-        val status = Json.decodeFromJsonElement<ClearanceStatus>(statusElement)
+        val status = jsonIg.decodeFromJsonElement<ClearanceStatus>(statusElement)
         status
       }
 
@@ -138,7 +138,7 @@ internal class ClearanceRequests(
     val response = call.await()
 
     return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
-      val status = Json.decodeFromString<ClearanceStatus>(responseBody)
+      val status = jsonIg.decodeFromString<ClearanceStatus>(responseBody)
       Response(status)
     }
   }
@@ -162,7 +162,7 @@ internal class ClearanceRequests(
     val response = call.await()
 
     return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
-      val status = Json.decodeFromString<RequestClearanceResponse>(responseBody)
+      val status = jsonIg.decodeFromString<RequestClearanceResponse>(responseBody)
       Response(status)
     }
   }
@@ -174,14 +174,14 @@ internal class ClearanceRequests(
   ): RequestBody {
     val vehicle = buildJsonObject {
       put("vin", vin)
-      put("brand", Json.encodeToJsonElement(brand))
+      put("brand", jsonIg.encodeToJsonElement(brand))
       if (controlMeasures != null) {
         putJsonObject("control_measures") {
           for (controlMeasure in controlMeasures) {
             // polymorphism adds type key to child controlmeasure classes. remove with filter
-            val json = Json.encodeToJsonElement(controlMeasure)
+            val json = jsonIg.encodeToJsonElement(controlMeasure)
             val valuesWithoutType = json.jsonObject.filterNot { it.key == "type" }
-            val jsonTrimmed = Json.encodeToJsonElement(valuesWithoutType)
+            val jsonTrimmed = jsonIg.encodeToJsonElement(valuesWithoutType)
             put("odometer", jsonTrimmed)
           }
         }

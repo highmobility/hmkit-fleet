@@ -67,20 +67,22 @@ internal class AccessTokenRequestsTest : BaseTest() {
 
   @Test
   fun downloadsAccessTokenAndWritesToCacheIfDoesNotExistOrExpired() {
-    val responseAccessToken = notExpiredAccessToken()
-    // return null from cache at first, then on next call a new one
-    // if auth token is expired, the cache does not return it also
-    every { cache getProperty "accessToken" } returnsMany listOf(null, responseAccessToken)
+    for (i in 0..1) {
+      val responseAccessToken = notExpiredAccessToken()
+      // return null from cache at first, then on next call a new one
+      // if auth token is expired, the cache does not return it also
+      every { cache getProperty "accessToken" } returnsMany listOf(null, responseAccessToken)
 
-    val response = runBlocking {
-      mockSuccessfulRequest(responseAccessToken, 200).getAccessToken()
+      val response = runBlocking {
+        mockSuccessfulRequest(responseAccessToken, i == 0, 200).getAccessToken()
+      }
+
+      val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
+      assertTrue(recordedRequest.path!!.endsWith("/access_tokens"))
+
+      verifyNewAccessTokenReturned(responseAccessToken, response)
+      verify { cache setProperty "accessToken" value responseAccessToken }
     }
-
-    val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
-    assertTrue(recordedRequest.path!!.endsWith("/access_tokens"))
-
-    verifyNewAccessTokenReturned(responseAccessToken, response)
-    verify { cache setProperty "accessToken" value responseAccessToken }
   }
 
   private fun verifyNewAccessTokenReturned(expected: AccessToken, response: Response<AccessToken>) {
@@ -93,7 +95,7 @@ internal class AccessTokenRequestsTest : BaseTest() {
     val responseAccessToken = notExpiredAccessToken()
     // return null from cache at first, then on next call a new one
     every { cache getProperty "accessToken" } returns responseAccessToken
-    val response = runBlocking { mockSuccessfulRequest(responseAccessToken, 201).getAccessToken() }
+    val response = runBlocking { mockSuccessfulRequest(responseAccessToken, false, 201).getAccessToken() }
 
     // this means request is not made
     verify(exactly = 0) { cache setProperty "accessToken" value any<AccessToken>() }
@@ -109,9 +111,9 @@ internal class AccessTokenRequestsTest : BaseTest() {
       .setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED)
       .setBody(
         "{\"errors\":" +
-          "[{\"detail\":\"Missing or invalid assertion. It must be a JWT signed with the service account key.\"," +
-          "\"source\":\"assertion\"," +
-          "\"title\":\"Not authorized\"}]}"
+            "[{\"detail\":\"Missing or invalid assertion. It must be a JWT signed with the service account key.\"," +
+            "\"source\":\"assertion\"," +
+            "\"title\":\"Not authorized\"}]}"
       )
     mockWebServer.enqueue(mockResponse)
     val baseUrl: HttpUrl = mockWebServer.url("")
@@ -163,9 +165,16 @@ internal class AccessTokenRequestsTest : BaseTest() {
     assertTrue(status.error!!.title == genericError.title)
   }
 
-  private fun mockSuccessfulRequest(responseAccessToken: AccessToken, responseCode: Int = 201): AccessTokenRequests {
+  private fun mockSuccessfulRequest(
+    responseAccessToken: AccessToken,
+    addUnknownKey: Boolean = false,
+    responseCode: Int = 201
+  ): AccessTokenRequests {
     // return null from cache at first, then on next call a new one
-    val json = Json.encodeToString(responseAccessToken)
+    var json = Json.encodeToString(responseAccessToken)
+    if (addUnknownKey) {
+      json = json.replaceFirst("{", "{\"unknownKey\":\"unknownValue\",")
+    }
 
     val mockResponse = MockResponse()
       .setResponseCode(responseCode)

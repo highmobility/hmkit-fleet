@@ -57,36 +57,49 @@ internal class VehicleDataRequestsTest : BaseTest() {
     mockWebServer.shutdown()
   }
 
-  @Test
-  fun getSuccess() {
-    val responseJson = """
+  private val successResponses = listOf(
+    """
     {
       "vin": $testVin,
       "status": "vehicle_running"
     }
-    """.trimIndent()
-
-    val mockResponse = MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(responseJson)
-
-    mockWebServer.enqueue(mockResponse)
-    val mockUrl = mockWebServer.url("").toString()
-    val webService = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
-
-    val response = runBlocking {
-      webService.getVehicleStatus(testVin)
+    """.trimIndent(),
+    """
+    {
+      "vin": $testVin,
+      "status": "vehicle_running",
+      "unknown": "value"
     }
+    """.trimIndent()
+  )
 
-    coVerify { accessTokenRequests.getAccessToken() }
+  @Test
+  fun getSuccess() {
+    successResponses.forEach {
+      val responseJson = it
 
-    val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
-    assertTrue(recordedRequest.path!!.endsWith("/vehicle-data/autoapi-13/$testVin"))
+      val mockResponse = MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(responseJson)
 
-    // verify request
-    assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${authToken.accessToken}")
+      mockWebServer.enqueue(mockResponse)
+      val mockUrl = mockWebServer.url("").toString()
+      val webService = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
 
-    // verify response
-    val status = response.response!!
-    assertTrue(status == responseJson)
+      val response = runBlocking {
+        webService.getVehicleStatus(testVin)
+      }
+
+      coVerify { accessTokenRequests.getAccessToken() }
+
+      val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
+      assertTrue(recordedRequest.path!!.endsWith("/vehicle-data/autoapi-13/$testVin"))
+
+      // verify request
+      assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${authToken.accessToken}")
+
+      // verify response
+      val status = response.response!!
+      assertTrue(status == responseJson)
+    }
   }
 
   @Test

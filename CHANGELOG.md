@@ -2,7 +2,11 @@
 
 This is the changelog for v2 releases. See v0/v1 releases in appropriate branches.
 
-## [2.2.2] - 2023-12-7
+## [2.0.3] - 2024-1-31
+
+- Fix `Json {} ignoreUnknownKeys` error
+
+## [2.0.2] - 2023-12-7
 
 - Update javadoc
 
