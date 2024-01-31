@@ -124,50 +124,65 @@ internal class ClearanceRequestsTest : BaseTest() {
 
   // request clearance
 
+  private val requestClearanceSuccessResponses = listOf(
+    """
+    {
+      "vehicles": [
+        {
+          "vin": "C0NNECT0000000001",
+          "status": "pending"
+        }
+      ]
+    }
+    """.trimIndent(),
+    """
+    {
+      "vehicles": [
+        {
+          "vin": "C0NNECT0000000001",
+          "status": "pending",
+          "unknown" : "value"
+        }
+      ]
+    }
+  """.trimIndent()
+  )
+
   @Test
   fun requestClearanceSuccessResponse() {
-    val mockResponse = MockResponse()
-      .setResponseCode(HttpURLConnection.HTTP_OK)
-      .setBody(
-        """
-                {
-                  "vehicles": [
-                    {
-                      "vin": "WBADT43452G296403",
-                      "status": "pending"
-                    }
-                  ]
-                }
-        """.trimIndent()
-      )
-    mockWebServer.enqueue(mockResponse)
-    val mockUrl = mockWebServer.url("").toString()
-    val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
+    requestClearanceSuccessResponses.forEach {
+      val mockResponse = MockResponse()
+        .setResponseCode(HttpURLConnection.HTTP_OK)
+        .setBody(it)
+      mockWebServer.enqueue(mockResponse)
+      val mockUrl = mockWebServer.url("").toString()
+      val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
 
-    val status = runBlocking {
-      webService.requestClearance("WBADT43452G296403", Brand.MERCEDES_BENZ, controlMeasures)
+      val status = runBlocking {
+        webService.requestClearance("C0NNECT0000000001", Brand.MERCEDES_BENZ, controlMeasures)
+      }
+
+      coVerify { accessTokenRequests.getAccessToken() }
+
+      val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
+      assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles"))
+
+      // verify request
+      assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
+
+      val jsonBody = Json.parseToJsonElement(recordedRequest.body.readUtf8())
+      val array = jsonBody.jsonObject["vehicles"] as JsonArray
+      val firstVehicle = array.first() as JsonObject
+      assertTrue(firstVehicle["vin"]?.jsonPrimitive?.contentOrNull == "C0NNECT0000000001")
+      val controlMeasures = firstVehicle["control_measures"]?.jsonObject
+      val odometer = controlMeasures?.get("odometer")?.jsonObject
+      assertTrue(odometer?.get("value")?.jsonPrimitive?.contentOrNull == "100000")
+      assertTrue(odometer?.get("unit")?.jsonPrimitive?.contentOrNull == "kilometers")
+
+      // verify response
+      assertTrue(status.response!!.status == ClearanceStatus.Status.PENDING)
+      assertTrue(status.response!!.vin == "C0NNECT0000000001")
     }
-
-    coVerify { accessTokenRequests.getAccessToken() }
-
-    val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
-    assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles"))
-
-    // verify request
-    assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
-
-    val jsonBody = Json.parseToJsonElement(recordedRequest.body.readUtf8())
-    val array = jsonBody.jsonObject["vehicles"] as JsonArray
-    val firstVehicle = array.first() as JsonObject
-    assertTrue(firstVehicle["vin"]?.jsonPrimitive?.contentOrNull == "WBADT43452G296403")
-    val controlMeasures = firstVehicle["control_measures"]?.jsonObject
-    val odometer = controlMeasures?.get("odometer")?.jsonObject
-    assertTrue(odometer?.get("value")?.jsonPrimitive?.contentOrNull == "100000")
-    assertTrue(odometer?.get("unit")?.jsonPrimitive?.contentOrNull == "kilometers")
-
-    // verify response
-    assertTrue(status.response!!.status == ClearanceStatus.Status.PENDING)
-    assertTrue(status.response!!.vin == "WBADT43452G296403")
   }
 
   @Test
@@ -175,7 +190,7 @@ internal class ClearanceRequestsTest : BaseTest() {
     testAuthTokenErrorReturned(mockWebServer, accessTokenRequests) { mockUrl ->
       val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
       webService.requestClearance(
-        "WBADT43452G296403",
+        "C0NNECT0000000001",
         Brand.MERCEDES_BENZ,
         controlMeasures
       )
@@ -187,7 +202,7 @@ internal class ClearanceRequestsTest : BaseTest() {
     testErrorResponseReturned(mockWebServer) { mockUrl ->
       val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
       webService.requestClearance(
-        "WBADT43452G296403",
+        "C0NNECT0000000001",
         Brand.MERCEDES_BENZ,
         controlMeasures
       )
@@ -199,7 +214,7 @@ internal class ClearanceRequestsTest : BaseTest() {
     testForUnknownResponseGenericErrorReturned(mockWebServer) { mockUrl ->
       val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
       webService.requestClearance(
-        "WBADT43452G296403",
+        "C0NNECT0000000001",
         Brand.MERCEDES_BENZ,
         controlMeasures
       )
@@ -208,47 +223,66 @@ internal class ClearanceRequestsTest : BaseTest() {
 
   // get clearance statuses
 
+  private val getClearanceStatusesSuccessResponses = listOf(
+    """
+    [
+      {
+        "brand":"bmw",
+        "vin": "C0NNECT0000000001",
+        "status": "pending"
+      },
+      {
+        "brand":"bmw",
+        "vin": "WBADT43452G296404",
+        "status": "pending"
+      }
+    ]
+    """.trimIndent(),
+    """
+    [
+      {
+        "brand":"bmw",
+        "vin": "C0NNECT0000000001",
+        "status": "pending",
+        "unknown" : "value"
+      },
+      {
+        "brand":"bmw",
+        "vin": "WBADT43452G296404",
+        "status": "pending"
+      }
+    ]
+  """.trimIndent()
+  )
+
   @Test
   fun getClearanceStatusesSuccessResponse() {
-    val mockResponse = MockResponse()
-      .setResponseCode(HttpURLConnection.HTTP_OK)
-      .setBody(
-        """
-                [
-                  {
-                    "brand":"bmw",
-                    "vin": "WBADT43452G296403",
-                    "status": "pending"
-                  },
-                  {
-                    "brand":"bmw",
-                    "vin": "WBADT43452G296404",
-                    "status": "pending"
-                  }
-                ]
-        """.trimIndent()
-      )
-    mockWebServer.enqueue(mockResponse)
-    val mockUrl = mockWebServer.url("").toString()
-    val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
+    getClearanceStatusesSuccessResponses.forEach {
+      val mockResponse = MockResponse()
+        .setResponseCode(HttpURLConnection.HTTP_OK)
+        .setBody(it)
+      mockWebServer.enqueue(mockResponse)
+      val mockUrl = mockWebServer.url("").toString()
+      val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
 
-    val status = runBlocking {
-      webService.getClearanceStatuses()
+      val status = runBlocking {
+        webService.getClearanceStatuses()
+      }
+
+      coVerify { accessTokenRequests.getAccessToken() }
+
+      val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
+      assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
+
+      assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles"))
+      assertTrue(recordedRequest.method == "GET")
+
+      assertTrue(status.response!![0].status == ClearanceStatus.Status.PENDING)
+      assertTrue(status.response!![0].vin == "C0NNECT0000000001")
+
+      assertTrue(status.response!![1].status == ClearanceStatus.Status.PENDING)
+      assertTrue(status.response!![1].vin == "WBADT43452G296404")
     }
-
-    coVerify { accessTokenRequests.getAccessToken() }
-
-    val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
-    assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
-
-    assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles"))
-    assertTrue(recordedRequest.method == "GET")
-
-    assertTrue(status.response!![0].status == ClearanceStatus.Status.PENDING)
-    assertTrue(status.response!![0].vin == "WBADT43452G296403")
-
-    assertTrue(status.response!![1].status == ClearanceStatus.Status.PENDING)
-    assertTrue(status.response!![1].vin == "WBADT43452G296404")
   }
 
   @Test
@@ -306,47 +340,66 @@ internal class ClearanceRequestsTest : BaseTest() {
 
   // get clearance status
 
+  private val getClearanceStatusSuccessResponses = listOf(
+    """
+    {
+      "brand":"bmw",
+      "vin": "C0NNECT0000000001",
+      "status": "pending",
+      "changelog": [
+          {
+            "timestamp": "string",
+            "status": "approved",
+            "unknown" : "value"
+          }
+      ]
+    }
+    """.trimIndent(),
+    """
+    {
+      "brand":"bmw",
+      "vin": "C0NNECT0000000001",
+      "status": "pending",
+      "changelog": [
+          {
+            "timestamp": "string",
+            "status": "approved"
+          }
+      ],
+      "unknown" : "value"
+    }
+    """.trimIndent(),
+  )
+
   @Test
   fun getClearanceStatusSuccessResponse() {
-    val vin = "WBADT43452G296403"
-    val mockResponse = MockResponse()
-      .setResponseCode(HttpURLConnection.HTTP_OK)
-      .setBody(
-        """
-                  {
-                    "brand":"bmw",
-                    "vin": "$vin",
-                    "status": "pending",
-                    "changelog": [
-                        {
-                          "timestamp": "string",
-                          "status": "approved"
-                        }
-                    ]
-                  }
-        """.trimIndent()
-      )
-    mockWebServer.enqueue(mockResponse)
-    val mockUrl = mockWebServer.url("").toString()
-    val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
+    getClearanceStatusSuccessResponses.forEach {
+      val vin = "C0NNECT0000000001"
+      val mockResponse = MockResponse()
+        .setResponseCode(HttpURLConnection.HTTP_OK)
+        .setBody(it)
+      mockWebServer.enqueue(mockResponse)
+      val mockUrl = mockWebServer.url("").toString()
+      val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
 
-    val status = runBlocking {
-      webService.getClearanceStatus(vin)
+      val status = runBlocking {
+        webService.getClearanceStatus(vin)
+      }
+
+      coVerify { accessTokenRequests.getAccessToken() }
+
+      val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
+      assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
+
+      assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles/$vin"))
+      assertTrue(recordedRequest.method == "GET")
+
+      assertTrue(status.response!!.status == ClearanceStatus.Status.PENDING)
+      assertTrue(status.response?.vin == vin)
+      assertTrue(status.response?.brand == Brand.BMW)
+
+      assertTrue(status.response?.changelog?.get(0)?.status == ClearanceStatus.Status.APPROVED)
     }
-
-    coVerify { accessTokenRequests.getAccessToken() }
-
-    val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
-    assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
-
-    assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles/$vin"))
-    assertTrue(recordedRequest.method == "GET")
-
-    assertTrue(status.response!!.status == ClearanceStatus.Status.PENDING)
-    assertTrue(status.response?.vin == vin)
-    assertTrue(status.response?.brand == Brand.BMW)
-
-    assertTrue(status.response?.changelog?.get(0)?.status == ClearanceStatus.Status.APPROVED)
   }
 
   @Test
@@ -375,38 +428,49 @@ internal class ClearanceRequestsTest : BaseTest() {
 
   // delete clearance
 
+  private val deleteClearanceSuccessResponses = listOf(
+    """
+    {
+      "vin": "C0NNECT0000000001",
+      "status": "revoking"
+    }
+    """.trimIndent(),
+    """
+    {
+      "vin": "C0NNECT0000000001",
+      "status": "revoking",
+      "unknown" : "value"
+    }
+  """.trimIndent()
+  )
+
   @Test
   fun deleteClearanceSuccessResponse() {
-    val vin = "WBADT43452G296403"
-    val mockResponse = MockResponse()
-      .setResponseCode(HttpURLConnection.HTTP_OK)
-      .setBody(
-        """
-                    {
-                      "vin": "$vin",
-                      "status": "revoking"
-                    }
-        """.trimIndent()
-      )
-    mockWebServer.enqueue(mockResponse)
-    val mockUrl = mockWebServer.url("").toString()
-    val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
+    val vin = "C0NNECT0000000001"
+    deleteClearanceSuccessResponses.forEach {
+      val mockResponse = MockResponse()
+        .setResponseCode(HttpURLConnection.HTTP_OK)
+        .setBody(it)
+      mockWebServer.enqueue(mockResponse)
+      val mockUrl = mockWebServer.url("").toString()
+      val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
 
-    val status = runBlocking {
-      webService.deleteClearance(vin)
+      val status = runBlocking {
+        webService.deleteClearance(vin)
+      }
+
+      coVerify { accessTokenRequests.getAccessToken() }
+
+      val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
+      assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles/$vin"))
+
+      // verify request
+      assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
+
+      // verify response
+      assertTrue(status.response!!.status == ClearanceStatus.Status.REVOKING)
+      assertTrue(status.response!!.vin == vin)
     }
-
-    coVerify { accessTokenRequests.getAccessToken() }
-
-    val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
-    assertTrue(recordedRequest.path!!.endsWith("/fleets/vehicles/$vin"))
-
-    // verify request
-    assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${accessToken.accessToken}")
-
-    // verify response
-    assertTrue(status.response!!.status == ClearanceStatus.Status.REVOKING)
-    assertTrue(status.response!!.vin == vin)
   }
 
   @Test
@@ -414,7 +478,7 @@ internal class ClearanceRequestsTest : BaseTest() {
     testAuthTokenErrorReturned(mockWebServer, accessTokenRequests) { mockUrl ->
       val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
       webService.deleteClearance(
-        "WBADT43452G296403"
+        "C0NNECT0000000001"
       )
     }
   }
@@ -424,7 +488,7 @@ internal class ClearanceRequestsTest : BaseTest() {
     testErrorResponseReturned(mockWebServer) { mockUrl ->
       val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
       webService.deleteClearance(
-        "WBADT43452G296403"
+        "C0NNECT0000000001"
       )
     }
   }
@@ -434,7 +498,7 @@ internal class ClearanceRequestsTest : BaseTest() {
     testForUnknownResponseGenericErrorReturned(mockWebServer) { mockUrl ->
       val webService = ClearanceRequests(client, mockLogger, mockUrl, accessTokenRequests)
       webService.deleteClearance(
-        "WBADT43452G296403"
+        "C0NNECT0000000001"
       )
     }
   }
