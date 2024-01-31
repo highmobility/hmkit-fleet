@@ -149,6 +149,56 @@ internal class TelematicsRequestsTest : BaseTest() {
         assert(response.response?.responseData!! == decryptedReceivedCommand)
     }
 
+  @Test
+  fun createAccessTokenV05() {
+    mockNonceResponse()
+    mockTelematicsResponse()
+
+    val baseUrl: HttpUrl = mockWebServer.url("")
+
+    val telematicsRequests = TelematicsRequests(
+      client, mockLogger, baseUrl.toString(), privateKey, certificate, crypto
+    )
+
+    val response = runBlocking {
+      telematicsRequests.sendCommandV05(Diagnostics.GetState(), mockAccessCert)
+    }
+
+    verify {
+      crypto.createTelematicsContainer(
+        Diagnostics.GetState(), privateKey, certificate.serial, mockAccessCert, nonce
+      )
+    }
+
+    // first request is nonce
+    val nonceRequest: RecordedRequest = mockWebServer.takeRequest()
+    assert(nonceRequest.path!!.endsWith("/nonces"))
+
+    // verify request
+    val nonceRequestBody = Json.parseToJsonElement(nonceRequest.body.readUtf8()) as JsonObject
+    assert(nonceRequestBody["serial_number"]!!.jsonPrimitive.contentOrNull == certificate.serial.hex)
+
+    // second request is telematics command
+    val commandRequest: RecordedRequest = mockWebServer.takeRequest()
+    assert(commandRequest.path!!.endsWith("/telematics_commands"))
+
+    // verify request
+    val jsonBody = Json.parseToJsonElement(commandRequest.body.readUtf8()) as JsonObject
+    assert(jsonBody["serial_number"]!!.jsonPrimitive.contentOrNull == certificate.serial.hex)
+    assert(jsonBody["issuer"]!!.jsonPrimitive.contentOrNull == certificate.issuer.hex)
+    assert(jsonBody["data"]!!.jsonPrimitive.contentOrNull == encryptedSentCommand.base64)
+
+    // verify command decrypted
+    verify {
+      crypto.getPayloadFromTelematicsContainer(
+        encryptedReceivedCommand, privateKey, mockAccessCert
+      )
+    }
+
+    // verify final telematics command response
+    assert(response.response!! == decryptedReceivedCommand)
+  }
+
     private fun mockTelematicsResponse() {
         val mockResponse = MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(
             """
