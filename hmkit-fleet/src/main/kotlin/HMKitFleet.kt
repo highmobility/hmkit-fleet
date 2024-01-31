@@ -181,6 +181,24 @@ object HMKitFleet {
     }
 
     /**
+     * Send a telematics command to the vehicle.
+     *
+     * This is a legacy method that returns the response as a [Bytes] object. If possible, use the normal [sendCommand]
+     * method that returns the correct error format.
+     *
+     * @param vehicleAccess The vehicle access object returned in [getVehicleAccess]
+     * @param command The command that is sent to the vehicle.
+     * @return The response command from the vehicle.
+     */
+    @Deprecated("Please use sendCommand instead")
+    fun sendCommandV05(
+        command: Bytes,
+        vehicleAccess: VehicleAccess
+    ): CompletableFuture<Response<Bytes>> = GlobalScope.future {
+        koin.get<TelematicsRequests>().sendCommandV05(command, vehicleAccess.accessCertificate)
+    }
+
+    /**
      * Revoke the vehicle clearance. After this, the [VehicleAccess] object is invalid.
      *
      * @param vehicleAccess The vehicle access object returned in [getVehicleAccess]

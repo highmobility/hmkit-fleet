@@ -73,7 +73,7 @@ internal class AuthTokenRequests(
 
         return try {
             if (response.code == HttpURLConnection.HTTP_CREATED) {
-                cache.authToken = Json.decodeFromString(responseBody)
+                cache.authToken = jsonIg.decodeFromString(responseBody)
                 Response(cache.authToken)
             } else {
                 parseError(responseBody)

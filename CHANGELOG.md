@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.8.0] - 2024-1-31
+
+- Fix `Json {} ignoreUnknownKeys` error
+- Add deprecated `sendCommandV05` method to support 0.5.0 API
+
 ## [0.7.5] - 2023-11-29
 
 ### Added
