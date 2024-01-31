@@ -81,7 +81,7 @@ internal class ClearanceRequests(
       val statuses = jsonElement["vehicles"] as JsonArray
       for (statusElement in statuses) {
         val status =
-          Json.decodeFromJsonElement<RequestClearanceResponse>(statusElement)
+          jsonIg.decodeFromJsonElement<RequestClearanceResponse>(statusElement)
         if (status.vin == vin) {
           return@tryParseResponse Response(status, null)
         }
@@ -112,7 +112,7 @@ internal class ClearanceRequests(
 
       val builder = Array(statuses.size) {
         val statusElement = statuses[it]
-        val status = Json.decodeFromJsonElement<ClearanceStatus>(statusElement)
+        val status = jsonIg.decodeFromJsonElement<ClearanceStatus>(statusElement)
         status
       }
 
@@ -138,7 +138,7 @@ internal class ClearanceRequests(
     val response = call.await()
 
     return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
-      val status = Json.decodeFromString<ClearanceStatus>(responseBody)
+      val status = jsonIg.decodeFromString<ClearanceStatus>(responseBody)
       Response(status)
     }
   }
@@ -162,7 +162,7 @@ internal class ClearanceRequests(
     val response = call.await()
 
     return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
-      val status = Json.decodeFromString<RequestClearanceResponse>(responseBody)
+      val status = jsonIg.decodeFromString<RequestClearanceResponse>(responseBody)
       Response(status)
     }
   }

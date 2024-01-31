@@ -70,7 +70,7 @@ internal class UtilityRequests(
     val response = call.await()
 
     return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
-      val eligibilityStatus = Json.decodeFromString<EligibilityStatus>(responseBody)
+      val eligibilityStatus = jsonIg.decodeFromString<EligibilityStatus>(responseBody)
       if (eligibilityStatus.vin != vin) logger.warn("VIN in response does not match VIN in request")
       Response(eligibilityStatus, null)
     }
