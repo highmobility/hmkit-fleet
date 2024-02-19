@@ -67,3 +67,16 @@ dokkaHtml {
 dokkaJavadoc {
     outputDirectory.set(file("$buildDir/dokka/html/v2/javadoc"))
 }
+
+tasks.register('writeRedirectIndexHtml') {
+    doLast {
+        String content = "<html>\n" +
+                "<meta http-equiv=\"refresh\" content=\"0; url=v2/\" />\n" +
+                "</html>"
+        file("$buildDir/dokka/html/index.html").write(content)
+    }
+}
+
+tasks.dokkaHtml {
+    finalizedBy writeRedirectIndexHtml
+}
