@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.1] - 2024-3-14
+
+### Added
+
+- Volvo brand
+
 ## [0.8.0] - 2024-1-31
 
 - Fix `Json {} ignoreUnknownKeys` error
