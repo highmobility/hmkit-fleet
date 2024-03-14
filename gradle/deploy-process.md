@@ -7,9 +7,9 @@ Release is done via a merged pull request to main/v0/v1 and then creating a rele
 - update CHANGELOG.md
 - update the version in `gradle.properties`
 - merge the PR to the `v0`/`v1`/`main` branch
-- Create release tag
+- Draft a new release in GitHub UI
   - target: v0/v1/main
-  - press generate relase notes
+  - press generate release notes
   - press publish release
   - Action starts that pushes the package to MavenCentral.
   - You can check https://oss.sonatype.org/ whether release was successful or not.
