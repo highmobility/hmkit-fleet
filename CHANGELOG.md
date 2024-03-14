@@ -2,6 +2,12 @@
 
 This is the changelog for v2 releases. See v0/v1 releases in appropriate branches.
 
+## [2.0.4] - 2024-3-14
+
+### Added
+
+- Volvo brand
+
 ## [2.0.3] - 2024-1-31
 
 - Fix `Json {} ignoreUnknownKeys` error
