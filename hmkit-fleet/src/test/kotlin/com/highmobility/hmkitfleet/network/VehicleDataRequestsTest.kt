@@ -74,7 +74,7 @@ internal class VehicleDataRequestsTest : BaseTest() {
   )
 
   @Test
-  fun getSuccess() {
+  fun vehicleStatusSuccess() {
     successResponses.forEach {
       val responseJson = it
 
@@ -82,10 +82,10 @@ internal class VehicleDataRequestsTest : BaseTest() {
 
       mockWebServer.enqueue(mockResponse)
       val mockUrl = mockWebServer.url("").toString()
-      val webService = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
 
       val response = runBlocking {
-        webService.getVehicleStatus(testVin)
+        requests.getVehicleStatus(testVin)
       }
 
       coVerify { accessTokenRequests.getAccessToken() }
@@ -103,31 +103,91 @@ internal class VehicleDataRequestsTest : BaseTest() {
   }
 
   @Test
-  fun authTokenError() = runBlocking {
+  fun vehicleStatusAuthTokenError() = runBlocking {
     testAuthTokenErrorReturned(mockWebServer, accessTokenRequests) { mockUrl ->
-      val webService = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
-      webService.getVehicleStatus(
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+      requests.getVehicleStatus(
         testVin,
       )
     }
   }
 
   @Test
-  fun requestClearanceErrorResponse() = runBlocking {
+  fun vehicleStatusErrorResponse() = runBlocking {
     testErrorResponseReturned(mockWebServer) { mockUrl ->
-      val webService = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
 
-      webService.getVehicleStatus(
+      requests.getVehicleStatus(
         testVin,
       )
     }
   }
 
   @Test
-  fun requestClearanceUnknownResponse() = runBlocking {
+  fun vehicleStatusUnknownResponse() = runBlocking {
     testForUnknownResponseGenericErrorReturned(mockWebServer) { mockUrl ->
-      val webService = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
-      webService.getVehicleStatus(
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+      requests.getVehicleStatus(
+        testVin,
+      )
+    }
+  }
+
+  @Test
+  fun vehicleStaticDataSuccess() {
+    successResponses.forEach {
+      val responseJson = it
+
+      val mockResponse = MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(responseJson)
+
+      mockWebServer.enqueue(mockResponse)
+      val mockUrl = mockWebServer.url("").toString()
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+
+      val response = runBlocking {
+        requests.getStaticData(testVin)
+      }
+
+      coVerify { accessTokenRequests.getAccessToken() }
+
+      val recordedRequest: RecordedRequest = mockWebServer.takeRequest()
+      assertTrue(recordedRequest.path!!.endsWith("/vehicle-static-data/$testVin"))
+
+      // verify request
+      assertTrue(recordedRequest.headers["Authorization"] == "Bearer ${authToken.accessToken}")
+
+      // verify response
+      val status = response.response!!
+      assertTrue(status == responseJson)
+    }
+  }
+
+  @Test
+  fun vehicleStaticDataAuthTokenError() = runBlocking {
+    testAuthTokenErrorReturned(mockWebServer, accessTokenRequests) { mockUrl ->
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+      requests.getStaticData(
+        testVin,
+      )
+    }
+  }
+
+  @Test
+  fun vehicleStaticDataErrorResponse() = runBlocking {
+    testErrorResponseReturned(mockWebServer) { mockUrl ->
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+
+      requests.getStaticData(
+        testVin,
+      )
+    }
+  }
+
+  @Test
+  fun vehicleStaticDataUnknownResponse() = runBlocking {
+    testForUnknownResponseGenericErrorReturned(mockWebServer) { mockUrl ->
+      val requests = VehicleDataRequests(client, mockLogger, mockUrl, accessTokenRequests)
+      requests.getStaticData(
         testVin,
       )
     }
