@@ -37,7 +37,7 @@ def deployGitUrl="https://github.com/highmobility/hmkit-fleet"
 def deployGroupId="com.high-mobility"
 def deployLicenseName="MIT"
 def deployLicenseUrl="https://opensource.org/licenses/MIT"
-def deployId=name
+def deployId="hmkit-fleet"
 
 def isAndroid = project.plugins.findPlugin("com.android.library")
 
