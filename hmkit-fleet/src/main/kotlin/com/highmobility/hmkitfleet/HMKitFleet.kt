@@ -135,10 +135,26 @@ class HMKitFleet constructor(
     koin.get<ClearanceRequests>().deleteClearance(vin)
   }
 
+  /**
+   * Get vehicle status JSON string from the [Vehicle Data API](https://docs.high-mobility.com/api-references/code-references/vehicle-data/reference/v1/)
+   *
+   * Read more in the [Vehicle Data API Tutorial](https://docs.high-mobility.com/guides/getting-started/rest/)
+   */
   fun getVehicleState(
     vin: String
   ): CompletableFuture<Response<String>> = scope.future {
     koin.get<VehicleDataRequests>().getVehicleStatus(vin)
+  }
+
+  /**
+   * Get the static information about a vehicle. Static data can include the vehicle's brand, equipment and more.
+   *
+   * Read more in the [Static Data API Tutorial](https://docs.high-mobility.com/guides/getting-started/static-data-api/)
+   */
+  fun getVehicleStaticData(
+    vin: String
+  ): CompletableFuture<Response<String>> = scope.future {
+    koin.get<VehicleDataRequests>().getStaticData(vin)
   }
 
   /**

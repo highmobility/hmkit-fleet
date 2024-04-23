@@ -2,6 +2,12 @@
 
 This is the changelog for v2 releases. See v0/v1 releases in appropriate branches.
 
+## [2.1.0] - 2024-4-23
+
+### Added
+
+- Vehicle static data request
+
 ## [2.0.4] - 2024-3-14
 
 ### Added

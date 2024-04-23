@@ -41,6 +41,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -143,6 +144,40 @@ class HMKitFleetTest : BaseTest() {
     val vehicleStatus = hmkit.getVehicleState("vin1").get()
     val json = Json.decodeFromString<JsonObject>(vehicleStatus.response ?: "")
     assertTrue(json["vin"]?.jsonPrimitive?.content == "vin1")
+  }
+
+  @Test
+  fun getVehicleStaticData() = runTest {
+    coEvery {
+      vehicleDataRequests.getStaticData("vin1")
+    } returns Response(
+      """
+        {
+          "manufacturer": {
+              "brand": "Jeep",
+              "sub_model": "80th Anniversary Plug-In Hybrid 4WD",
+              "type_group_name": "Compass",
+              "model": "Compass (M7)(2020->)",
+              "sales_description": "Compass 1.3 Plug-In Hybrid (EURO 6d) 80th Annivers"
+          },
+          "equipment": {
+              "series_equipment": [
+                  {
+                      "description": "airbag driver side/passenger side",
+                      "positions": [],
+                      "manufacturer_id": null
+                  }
+              ]
+          }
+      }
+      """.trimIndent(),
+      null
+    )
+
+    val hmkit = HMKitFleet(oauthCredentials)
+    val staticData = hmkit.getVehicleStaticData("vin1").get()
+    val json = Json.decodeFromString<JsonObject>(staticData.response ?: "")
+    assertTrue(json["manufacturer"]?.jsonObject?.get("brand")?.jsonPrimitive?.content == "Jeep")
   }
 
   @Test

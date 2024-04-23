@@ -62,4 +62,28 @@ internal class VehicleDataRequests(
       Response(responseBody, null)
     }
   }
+
+  suspend fun getStaticData(
+    vin: String,
+  ): Response<String> {
+    val authToken = accessTokenRequests.getAccessToken()
+
+    if (authToken.error != null) return Response(null, authToken.error)
+
+    val request = Request.Builder()
+      .url("$baseUrl/vehicle-static-data/$vin")
+      .header("Content-Type", "application/json")
+      .header("Authorization", "Bearer ${authToken.response?.accessToken}")
+      .get()
+      .build()
+
+    printRequest(request)
+
+    val call = client.newCall(request)
+    val response = call.await()
+
+    return tryParseResponse(response, HttpURLConnection.HTTP_OK) { responseBody ->
+      Response(responseBody, null)
+    }
+  }
 }
