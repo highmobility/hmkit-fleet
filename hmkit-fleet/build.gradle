@@ -5,7 +5,7 @@ plugins {
     // CI
     id "org.barfuin.gradle.jacocolog" version "3.1.0"
     id "io.gitlab.arturbosch.detekt" version "1.23.0"
-    id "org.jetbrains.dokka" version "1.8.20"
+    id "org.jetbrains.dokka" version "1.9.20"
 }
 
 kotlin {
@@ -66,6 +66,10 @@ dokkaHtml {
 
 dokkaJavadoc {
     outputDirectory.set(file("$buildDir/dokka/html/v2/javadoc"))
+}
+
+dokkaGfm {
+    outputDirectory.set(file("$rootDir/docs/"))
 }
 
 tasks.register('writeRedirectIndexHtml') {

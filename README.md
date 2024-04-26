@@ -10,6 +10,7 @@ Telematics API to help car companies manage their fleet.
 * [Requirements](#requirements)
 * [Getting Started](#getting-started)
 * [Architecture](#architecture)
+* [API Reference](/docs/hmkit-fleet/com.highmobility.hmkitfleet/-h-m-kit-fleet/index.md)
 * [License](#License)
 * [Contributing](#contributing)
 

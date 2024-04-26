@@ -93,3 +93,4 @@ private-key.json
 credentialsPrivateKey.json
 credentialsOAuth.json
 hmkit-fleet/bin
+.vscode

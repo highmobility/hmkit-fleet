@@ -1,0 +1,15 @@
+//[hmkit-fleet](../../index.md)/[com.highmobility.hmkitfleet.model](index.md)
+
+# Package-level declarations
+
+## Types
+
+| Name | Summary |
+|---|---|
+| [Brand](-brand/index.md) | [jvm]<br>@Serializable<br>enum [Brand](-brand/index.md) : [Enum](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/index.html)&lt;[Brand](-brand/index.md)&gt; |
+| [ChangeLogItem](-change-log-item/index.md) | [jvm]<br>@Serializable<br>data class [ChangeLogItem](-change-log-item/index.md)(val status: [ClearanceStatus.Status](-clearance-status/-status/index.md), val timestamp: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)) |
+| [ClearanceStatus](-clearance-status/index.md) | [jvm]<br>@Serializable<br>data class [ClearanceStatus](-clearance-status/index.md)(val vin: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val status: [ClearanceStatus.Status](-clearance-status/-status/index.md), val brand: [Brand](-brand/index.md)? = null, val changelog: [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[ChangeLogItem](-change-log-item/index.md)&gt; = emptyList()) |
+| [ControlMeasure](-control-measure/index.md) | [jvm]<br>@Serializable<br>sealed class [ControlMeasure](-control-measure/index.md) |
+| [EligibilityStatus](-eligibility-status/index.md) | [jvm]<br>@Serializable<br>data class [EligibilityStatus](-eligibility-status/index.md)(val vin: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val eligible: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), val dataDelivery: [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[EligibilityStatus.DataDelivery](-eligibility-status/-data-delivery/index.md)&gt; = emptyList(), val connectivityStatus: [EligibilityStatus.ConnectivityStatus](-eligibility-status/-connectivity-status/index.md)? = null, val primaryUserAssigned: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)? = null) |
+| [Odometer](-odometer/index.md) | [jvm]<br>@Serializable<br>@SerialName(value = &quot;odometer&quot;)<br>data class [Odometer](-odometer/index.md)(val value: [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html), val unit: [Odometer.Length](-odometer/-length/index.md)) : [ControlMeasure](-control-measure/index.md) |
+| [RequestClearanceResponse](-request-clearance-response/index.md) | [jvm]<br>@Serializable<br>data class [RequestClearanceResponse](-request-clearance-response/index.md)(val vin: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val status: [ClearanceStatus.Status](-clearance-status/-status/index.md), val description: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)? = null) |
