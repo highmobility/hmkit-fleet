@@ -13,7 +13,7 @@ import java.util.Base64
  * The credentials to be used for the SDK. Choose from either [HMKitOAuthCredentials] or
  * [HMKitPrivateKeyCredentials].
  *
- * [javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitCredentials.html)
+ * [Check out the Javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitCredentials.html)
  *
  */
 abstract class HMKitCredentials {
@@ -29,7 +29,7 @@ abstract class HMKitCredentials {
 /**
  * The OAuth credentials to be used for the SDK.
  *
- * [javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitOAuthCredentials.html)
+ * [Check out the Javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitOAuthCredentials.html)
  */
 @Serializable
 data class HMKitOAuthCredentials(
@@ -57,7 +57,7 @@ data class HMKitOAuthCredentials(
 /**
  * The private key credentials to be used for the SDK.
  *
- * [javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitPrivateKeyCredentials.html)
+ * [Check out the Javadoc](https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitPrivateKeyCredentials.html)
  */
 @Serializable
 data class HMKitPrivateKeyCredentials(
