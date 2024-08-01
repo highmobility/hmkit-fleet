@@ -72,6 +72,12 @@ dokkaGfm {
     outputDirectory.set(file("$rootDir/docs/"))
 }
 
+tasks.register('renameDokkaReadme') {
+    doLast {
+        file("$rootDir/docs/index.md").renameTo("$rootDir/docs/README.md")
+    }
+}
+
 tasks.register('writeRedirectIndexHtml') {
     doLast {
         String content = "<html>\n" +
@@ -81,6 +87,5 @@ tasks.register('writeRedirectIndexHtml') {
     }
 }
 
-tasks.dokkaHtml {
-    finalizedBy writeRedirectIndexHtml
-}
+tasks.dokkaHtml.finalizedBy writeRedirectIndexHtml
+tasks.dokkaGfm.finalizedBy renameDokkaReadme
