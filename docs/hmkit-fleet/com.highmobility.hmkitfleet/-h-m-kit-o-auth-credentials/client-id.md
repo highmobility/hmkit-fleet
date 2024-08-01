@@ -1,8 +1,0 @@
-//[hmkit-fleet](../../../index.md)/[com.highmobility.hmkitfleet](../index.md)/[HMKitOAuthCredentials](index.md)/[clientId](client-id.md)
-
-# clientId
-
-[jvm]\
-val [clientId](client-id.md): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
-
-The OAuth client ID.
