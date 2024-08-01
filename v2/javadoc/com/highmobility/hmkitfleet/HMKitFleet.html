@@ -121,7 +121,15 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
     new HMKitConfiguration.Builder()
      .credentials(new HMKitOAuthCredentials(&quot;client_id&quot;, &quot;client_secret&quot;))
      .build()
-);</code></pre><p><a href=https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.html>javadoc</a></p></div>
+);</code></pre><p><a href=https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.html>Check out the Javadoc</a></p></div>
+
+                    <dl>
+
+                    
+
+                    
+
+                    </dl>
                 </li>
             </ul>
         </div>
@@ -149,7 +157,7 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                             <td class="colFirst"><code>public enum</code></td>
                                             <th class="colSecond" scope="row"><code><a href="HMKitFleet.Environment.html">HMKitFleet.Environment</a></span></code>
                                             </th>
-                                            <td class="colLast"><p>The Fleet SDK environment.</p><p><a href=https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.Environment.html>javadoc</a></p></td>
+                                            <td class="colLast"><p>The Fleet SDK environment.</p><p><a href=https://highmobility.github.io/hmkit-fleet/v2/javadoc/com/highmobility/hmkitfleet/HMKitFleet.Environment.html>Check out the Javadoc</a></p></td>
                                         </tr>
                                         
                                     </table>
@@ -382,8 +390,10 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>getEligibility</h4>
                                         <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=model/EligibilityStatus.html>EligibilityStatus</a>&gt;&gt; <a href=HMKitFleet.html#getEligibility(java.lang.String,com.highmobility.hmkitfleet.model.Brand)>getEligibility</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> vin, <a href=model/Brand.html>Brand</a> brand)</pre>
                                         <div class="block"><p>Get the eligibility status for a specific VIN. This can be used to find out if the vehicle has the necessary connectivity to transmit data.</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -394,9 +404,16 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                             <dd><code>brand</code> - The vehicle brand</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+                                            <dt><span class="returnLabel">Returns:</span></dt>
+                                            <dd><p>The eligibility status</p></dd>
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
@@ -410,8 +427,10 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>requestClearance</h4>
                                         <pre class="methodSignature">@<a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html>JvmOverloads</a>() final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=model/RequestClearanceResponse.html>RequestClearanceResponse</a>&gt;&gt; <a href=HMKitFleet.html#requestClearance(java.lang.String,com.highmobility.hmkitfleet.model.Brand,java.util.List)>requestClearance</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> vin, <a href=model/Brand.html>Brand</a> brand, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=model/ControlMeasure.html>ControlMeasure</a>&gt; controlMeasures)</pre>
                                         <div class="block"><p>Start the data access clearance process for a vehicle.</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -426,9 +445,16 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                             <dd><code>controlMeasures</code> - Optional control measures for some vehicle brands.</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+                                            <dt><span class="returnLabel">Returns:</span></dt>
+                                            <dd><p>The clearance status</p></dd>
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
@@ -442,8 +468,10 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>requestClearance</h4>
                                         <pre class="methodSignature">@<a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html>JvmOverloads</a>() final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=model/RequestClearanceResponse.html>RequestClearanceResponse</a>&gt;&gt; <a href=HMKitFleet.html#requestClearance(java.lang.String,com.highmobility.hmkitfleet.model.Brand,java.util.List)>requestClearance</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> vin, <a href=model/Brand.html>Brand</a> brand)</pre>
                                         <div class="block"><p>Start the data access clearance process for a vehicle.</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -454,9 +482,16 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                             <dd><code>brand</code> - The vehicle brand</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+                                            <dt><span class="returnLabel">Returns:</span></dt>
+                                            <dd><p>The clearance status</p></dd>
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
@@ -470,8 +505,19 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>getClearanceStatuses</h4>
                                         <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/List.html>List</a>&lt;<a href=model/ClearanceStatus.html>ClearanceStatus</a>&gt;&gt;&gt; <a href=HMKitFleet.html#getClearanceStatuses()>getClearanceStatuses</a>()</pre>
                                         <div class="block"><p>Get the status of VINs that have previously been registered for data access clearance with <a href=HMKitFleet.html#requestClearance(java.lang.String,com.highmobility.hmkitfleet.model.Brand,java.util.List)>requestClearance</a>. After VIN is Approved, getVehicleAccess and subsequent sendCommand can be sent.</p></div>
+
+                                        <dl>
+
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+                                            <dt><span class="returnLabel">Returns:</span></dt>
+                                            <dd><p>The clearance statuses</p></dd>
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
@@ -485,8 +531,19 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>getClearanceStatus</h4>
                                         <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=model/ClearanceStatus.html>ClearanceStatus</a>&gt;&gt; <a href=HMKitFleet.html#getClearanceStatus(java.lang.String)>getClearanceStatus</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> vin)</pre>
                                         <div class="block"><p>Get the status of a <a href=HMKitFleet.html#getClearanceStatus(java.lang.String)>vin</a> that has previously been registered for data access clearance with <a href=HMKitFleet.html#requestClearance(java.lang.String,com.highmobility.hmkitfleet.model.Brand,java.util.List)>requestClearance</a>. After the <a href=HMKitFleet.html#getClearanceStatus(java.lang.String)>vin</a> is Approved, getVehicleAccess and subsequent sendCommand can be sent.</p></div>
+
+                                        <dl>
+
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+                                            <dt><span class="returnLabel">Returns:</span></dt>
+                                            <dd><p>The clearance status</p></dd>
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
@@ -500,17 +557,26 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>deleteClearance</h4>
                                         <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=model/RequestClearanceResponse.html>RequestClearanceResponse</a>&gt;&gt; <a href=HMKitFleet.html#deleteClearance(java.lang.String)>deleteClearance</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> vin)</pre>
                                         <div class="block"><p>Delete the clearance for the given VIN.</p><p>If the clearance is in a pending state, the activation process is canceled. If the vehicle is in an approved state, a revoke is attempted. If the revoke is successful, the VehicleAccess object for this VIN becomes invalid.</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
                                             <dd><code>vin</code> - The vehicle VIN number</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+                                            <dt><span class="returnLabel">Returns:</span></dt>
+                                            <dd><p>The clearance status</p></dd>
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
@@ -524,8 +590,16 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>getVehicleState</h4>
                                         <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>&gt;&gt; <a href=HMKitFleet.html#getVehicleState(java.lang.String)>getVehicleState</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> vin)</pre>
                                         <div class="block"><p>Get vehicle status JSON string from the <a href=https://docs.high-mobility.com/api-references/code-references/vehicle-data/reference/v1/.html>Vehicle Data API</a></p><p>Read more in the <a href=https://docs.high-mobility.com/guides/getting-started/rest/.html>Vehicle Data API Tutorial</a></p></div>
+
+                                        <dl>
+
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
@@ -539,8 +613,16 @@ public final class <span class="typeNameLabel"><a href=HMKitFleet.html>HMKitFlee
                                         <h4>getVehicleStaticData</h4>
                                         <pre class="methodSignature"> final <a href=https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html>CompletableFuture</a>&lt;<a href=network/Response.html>Response</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a>&gt;&gt; <a href=HMKitFleet.html#getVehicleStaticData(java.lang.String)>getVehicleStaticData</a>(<a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> vin)</pre>
                                         <div class="block"><p>Get the static information about a vehicle. Static data can include the vehicle's brand, equipment and more.</p><p>Read more in the <a href=https://docs.high-mobility.com/guides/getting-started/static-data-api/.html>Static Data API Tutorial</a></p></div>
+
+                                        <dl>
+
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
