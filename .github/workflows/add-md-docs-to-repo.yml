@@ -1,7 +1,7 @@
 name: Add mod docs to repo
 
 on:
-  pull_request:
+  push:
     branches:
       - main
       - test-docs-job
