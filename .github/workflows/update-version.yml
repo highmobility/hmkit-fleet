@@ -9,7 +9,7 @@ on:
 
 jobs:
   create-new-tag:
-    if: ${{ github.event.pull_request.merged }}
+    if: false
 
     runs-on: ubuntu-latest
 
