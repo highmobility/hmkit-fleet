@@ -2,6 +2,12 @@
 
 This is the changelog for v1 releases. See v0 changelog in the [v0 branch](https://github.com/highmobility/hmkit-fleet/tree/v0).
 
+## [1.0.6] - 2024-09-18
+
+### Added
+
+- Audi and Škoda brand
+
 ## [1.0.5] - 2024-3-14
 
 ### Added
