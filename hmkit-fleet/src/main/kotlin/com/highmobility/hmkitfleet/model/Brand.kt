@@ -65,6 +65,12 @@ enum class Brand {
   @SerialName("volvo-cars")
   VOLVO_CARS,
 
+  @SerialName("skoda")
+  SKODA,
+
+  @SerialName("audi")
+  AUDI,
+
   @SerialName("sandbox")
   SANDBOX,
 }

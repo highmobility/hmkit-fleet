@@ -2,6 +2,10 @@
 
 This is the changelog for v2 releases. See v0/v1 releases in appropriate branches.
 
+## [2.1.1] - 2024-09-18
+### Added
+- Audi and Škoda brand
+
 ## [2.1.0] - 2024-4-23
 
 ### Added
