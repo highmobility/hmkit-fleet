@@ -31,6 +31,8 @@ enum [Brand](index.md) : [Enum](https://kotlinlang.org/api/latest/jvm/stdlib/kot
 | [KIA](-k-i-a/index.md) | [jvm]<br>@SerialName(value = &quot;kia&quot;)<br>[KIA](-k-i-a/index.md) |
 | [TESLA](-t-e-s-l-a/index.md) | [jvm]<br>@SerialName(value = &quot;tesla&quot;)<br>[TESLA](-t-e-s-l-a/index.md) |
 | [VOLVO_CARS](-v-o-l-v-o_-c-a-r-s/index.md) | [jvm]<br>@SerialName(value = &quot;volvo-cars&quot;)<br>[VOLVO_CARS](-v-o-l-v-o_-c-a-r-s/index.md) |
+| [SKODA](-s-k-o-d-a/index.md) | [jvm]<br>@SerialName(value = &quot;skoda&quot;)<br>[SKODA](-s-k-o-d-a/index.md) |
+| [AUDI](-a-u-d-i/index.md) | [jvm]<br>@SerialName(value = &quot;audi&quot;)<br>[AUDI](-a-u-d-i/index.md) |
 | [SANDBOX](-s-a-n-d-b-o-x/index.md) | [jvm]<br>@SerialName(value = &quot;sandbox&quot;)<br>[SANDBOX](-s-a-n-d-b-o-x/index.md) |
 
 ## Properties
