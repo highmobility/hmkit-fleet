@@ -33,6 +33,10 @@ enum [Brand](index.md) : [Enum](https://kotlinlang.org/api/latest/jvm/stdlib/kot
 | [VOLVO_CARS](-v-o-l-v-o_-c-a-r-s/index.md) | [jvm]<br>@SerialName(value = &quot;volvo-cars&quot;)<br>[VOLVO_CARS](-v-o-l-v-o_-c-a-r-s/index.md) |
 | [SKODA](-s-k-o-d-a/index.md) | [jvm]<br>@SerialName(value = &quot;skoda&quot;)<br>[SKODA](-s-k-o-d-a/index.md) |
 | [AUDI](-a-u-d-i/index.md) | [jvm]<br>@SerialName(value = &quot;audi&quot;)<br>[AUDI](-a-u-d-i/index.md) |
+| [DACIA](-d-a-c-i-a/index.md) | [jvm]<br>@SerialName(value = &quot;dacia&quot;)<br>[DACIA](-d-a-c-i-a/index.md) |
+| [VOLKSWAGEN](-v-o-l-k-s-w-a-g-e-n/index.md) | [jvm]<br>@SerialName(value = &quot;volkswagen&quot;)<br>[VOLKSWAGEN](-v-o-l-k-s-w-a-g-e-n/index.md) |
+| [SEAT](-s-e-a-t/index.md) | [jvm]<br>@SerialName(value = &quot;seat&quot;)<br>[SEAT](-s-e-a-t/index.md) |
+| [CUPRA](-c-u-p-r-a/index.md) | [jvm]<br>@SerialName(value = &quot;cupra&quot;)<br>[CUPRA](-c-u-p-r-a/index.md) |
 | [SANDBOX](-s-a-n-d-b-o-x/index.md) | [jvm]<br>@SerialName(value = &quot;sandbox&quot;)<br>[SANDBOX](-s-a-n-d-b-o-x/index.md) |
 
 ## Properties
