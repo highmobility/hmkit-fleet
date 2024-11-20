@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.3] - 2024-11-20
+
+### Added
+
+- Audi and Škoda brand
+
+
 ## [0.8.2] - 2024-09-18
 
 ### Added
