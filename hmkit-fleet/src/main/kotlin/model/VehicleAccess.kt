@@ -125,6 +125,18 @@ enum class Brand {
     @SerialName("audi")
     AUDI,
 
+    @SerialName("dacia")
+    DACIA,
+
+    @SerialName("volkswagen")
+    VOLKSWAGEN,
+
+    @SerialName("seat")
+    SEAT,
+
+    @SerialName("cupra")
+    CUPRA,
+
     @SerialName("sandbox")
     SANDBOX,
 }
