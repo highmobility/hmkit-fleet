@@ -3,4 +3,4 @@
 # RequestClearanceResponse
 
 [jvm]\
-constructor(vin: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), status: [ClearanceStatus.Status](../-clearance-status/-status/index.md), description: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)? = null)
+constructor(vin: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html), status: [ClearanceStatus.Status](../-clearance-status/-status/index.md), description: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html)? = null)

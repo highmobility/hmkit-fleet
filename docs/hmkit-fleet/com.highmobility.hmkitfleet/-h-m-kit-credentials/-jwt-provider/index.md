@@ -9,6 +9,6 @@ interface [JwtProvider](index.md)
 
 | Name | Summary |
 |---|---|
-| [generateUuid](generate-uuid.md) | [jvm]<br>abstract fun [generateUuid](generate-uuid.md)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [getBaseUrl](get-base-url.md) | [jvm]<br>abstract fun [getBaseUrl](get-base-url.md)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [getTimestamp](get-timestamp.md) | [jvm]<br>abstract fun [getTimestamp](get-timestamp.md)(): [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html) |
+| [generateUuid](generate-uuid.md) | [jvm]<br>abstract fun [generateUuid](generate-uuid.md)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html) |
+| [getBaseUrl](get-base-url.md) | [jvm]<br>abstract fun [getBaseUrl](get-base-url.md)(): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html) |
+| [getTimestamp](get-timestamp.md) | [jvm]<br>abstract fun [getTimestamp](get-timestamp.md)(): [Long](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-long/index.html) |

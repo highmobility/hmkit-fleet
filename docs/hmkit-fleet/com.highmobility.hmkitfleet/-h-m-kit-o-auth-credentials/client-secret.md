@@ -3,6 +3,6 @@
 # clientSecret
 
 [jvm]\
-val [clientSecret](client-secret.md): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+val [clientSecret](client-secret.md): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html)
 
 The OAuth client secret.

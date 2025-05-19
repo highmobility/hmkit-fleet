@@ -3,4 +3,4 @@
 # ChangeLogItem
 
 [jvm]\
-constructor(status: [ClearanceStatus.Status](../-clearance-status/-status/index.md), timestamp: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html))
+constructor(status: [ClearanceStatus.Status](../-clearance-status/-status/index.md), timestamp: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html))

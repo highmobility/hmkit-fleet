@@ -3,7 +3,7 @@
 # deleteClearance
 
 [jvm]\
-fun [deleteClearance](delete-clearance.md)(vin: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)): [CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html)&lt;[Response](../../com.highmobility.hmkitfleet.network/-response/index.md)&lt;[RequestClearanceResponse](../../com.highmobility.hmkitfleet.model/-request-clearance-response/index.md)&gt;&gt;
+fun [deleteClearance](delete-clearance.md)(vin: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html)): [CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html)&lt;[Response](../../com.highmobility.hmkitfleet.network/-response/index.md)&lt;[RequestClearanceResponse](../../com.highmobility.hmkitfleet.model/-request-clearance-response/index.md)&gt;&gt;
 
 Delete the clearance for the given VIN.
 

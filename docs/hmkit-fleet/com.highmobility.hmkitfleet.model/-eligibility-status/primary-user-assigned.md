@@ -6,4 +6,4 @@
 
 @SerialName(value = &quot;primary_user_assigned&quot;)
 
-val [primaryUserAssigned](primary-user-assigned.md): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)? = null
+val [primaryUserAssigned](primary-user-assigned.md): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html)? = null

@@ -3,4 +3,4 @@
 # changelog
 
 [jvm]\
-val [changelog](changelog.md): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[ChangeLogItem](../-change-log-item/index.md)&gt;
+val [changelog](changelog.md): [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-list/index.html)&lt;[ChangeLogItem](../-change-log-item/index.md)&gt;
