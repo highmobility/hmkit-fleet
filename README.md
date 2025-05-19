@@ -1,3 +1,7 @@
+⚠️ This library is deprecate, use Fleet API directly https://docs.high-mobility.com/guides/cloud/service-account-api-fleet-clearance-tutorial/
+
+---
+
 This is the HMKitFleet v2 branch. See the [v1 branch](https://github.com/highmobility/hmkit-fleet/tree/v1) for the previous version.
 
 # HMKit Fleet
