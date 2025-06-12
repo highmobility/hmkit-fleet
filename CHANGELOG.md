@@ -2,6 +2,12 @@
 
 This is the changelog for v2 releases. See v0/v1 releases in appropriate branches.
 
+## [2.1.3] - 2025-06-12
+
+### Added
+
+- Nissan nad Polestar brands
+
 ## [2.1.2] - 2024-11-20
 
 ### Added
