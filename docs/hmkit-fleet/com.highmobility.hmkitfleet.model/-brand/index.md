@@ -37,6 +37,8 @@ enum [Brand](index.md) : [Enum](https://kotlinlang.org/api/latest/jvm/stdlib/kot
 | [VOLKSWAGEN](-v-o-l-k-s-w-a-g-e-n/index.md) | [jvm]<br>@SerialName(value = &quot;volkswagen&quot;)<br>[VOLKSWAGEN](-v-o-l-k-s-w-a-g-e-n/index.md) |
 | [SEAT](-s-e-a-t/index.md) | [jvm]<br>@SerialName(value = &quot;seat&quot;)<br>[SEAT](-s-e-a-t/index.md) |
 | [CUPRA](-c-u-p-r-a/index.md) | [jvm]<br>@SerialName(value = &quot;cupra&quot;)<br>[CUPRA](-c-u-p-r-a/index.md) |
+| [NISSAN](-n-i-s-s-a-n/index.md) | [jvm]<br>@SerialName(value = &quot;nissan&quot;)<br>[NISSAN](-n-i-s-s-a-n/index.md) |
+| [POLESTAR](-p-o-l-e-s-t-a-r/index.md) | [jvm]<br>@SerialName(value = &quot;polestar&quot;)<br>[POLESTAR](-p-o-l-e-s-t-a-r/index.md) |
 | [SANDBOX](-s-a-n-d-b-o-x/index.md) | [jvm]<br>@SerialName(value = &quot;sandbox&quot;)<br>[SANDBOX](-s-a-n-d-b-o-x/index.md) |
 
 ## Properties
