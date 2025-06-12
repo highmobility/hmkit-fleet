@@ -2,6 +2,12 @@
 
 This is the changelog for v1 releases. See v0 changelog in the [v0 branch](https://github.com/highmobility/hmkit-fleet/tree/v0).
 
+## [1.0.8] - 2025-06-12
+
+### Added
+
+- Nissan and Polestar brands
+
 ## [1.0.7] - 2024-11-20
 
 ### Added
