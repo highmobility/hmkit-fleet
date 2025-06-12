@@ -83,6 +83,12 @@ enum class Brand {
   @SerialName("cupra")
   CUPRA,
 
+  @SerialName("nissan")
+  NISSAN,
+
+  @SerialName("polestar")
+  POLESTAR,
+
   @SerialName("sandbox")
   SANDBOX,
 }
