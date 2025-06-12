@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.4] - 2025-06-12
+
+### Added
+
+- Nissan and Polestar brand
+
 ## [0.8.3] - 2024-11-20
 
 ### Added
